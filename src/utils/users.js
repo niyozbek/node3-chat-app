@@ -50,7 +50,8 @@ const getUsersInRoom = (room) => {
 const getRooms = () => {
     let rooms = []
     users.forEach((user) => {
-        if (rooms.indexOf(user.room) === -1) {
+        console.log(rooms)
+        if (!rooms.find((each) => each.room == user.room)) {
             rooms.push({ room: user.room })
         }
     })

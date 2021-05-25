@@ -63,7 +63,7 @@ io.on('connection', (socket) => {
         if (rooms.length === 0) {
             return callback('No rooms available yet!')
         }
-        socket.emit('roomList', getRooms())
+        socket.emit('roomList', rooms)
         callback()
     })
 
