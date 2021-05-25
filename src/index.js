@@ -7,7 +7,8 @@ const {
     addUser,
     removeUser,
     getUser,
-    getUsersInRoom
+    getUsersInRoom,
+    getRooms
 } = require('./utils/users')
 
 const app = express()
@@ -25,8 +26,15 @@ let count = 0
 io.on('connection', (socket) => {
     console.log('New WebSocket connection')
 
+    socket.on('join', ({ username, room, room_list }, callback) => {
+        if (room_list) {
+            room = room_list
+        }
 
-    socket.on('join', ({ username, room }, callback) => {
+        if (!room_list && !room) {
+            return callback('Please join or create a room')
+        }
+
         const { error, user } = addUser({ id: socket.id, username, room })
 
         if (error) {
@@ -50,6 +58,14 @@ io.on('connection', (socket) => {
         // io.to.emit, socket.broadcast.to.emit
     })
 
+    socket.on('getRoomList', (callback) => {
+        const rooms = getRooms()
+        if (rooms.length === 0) {
+            return callback('No rooms available yet!')
+        }
+        socket.emit('roomList', getRooms())
+        callback()
+    })
 
     socket.on('sendMessage', (message, callback) => {
         const user = getUser(socket.id)

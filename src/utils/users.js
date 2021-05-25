@@ -47,6 +47,16 @@ const getUsersInRoom = (room) => {
     return users.filter((user) => user.room === room)
 }
 
+const getRooms = () => {
+    let rooms = []
+    users.forEach((user) => {
+        if (rooms.indexOf(user.room) === -1) {
+            rooms.push({ room: user.room })
+        }
+    })
+    return rooms
+}
+
 // addUser({
 //     id: 22,
 //     username: 'Neyo',
@@ -74,5 +84,6 @@ module.exports = {
     addUser,
     removeUser,
     getUser,
-    getUsersInRoom
+    getUsersInRoom,
+    getRooms,
 }
