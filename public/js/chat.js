@@ -50,10 +50,10 @@ socket.on('message', (message) => {
     autoscroll()
 })
 
-socket.on('locationMessage', ({ locationURL, createdAt }) => {
+socket.on('locationMessage', ({ username, locationURL, createdAt }) => {
     // console.log('this' + locationURL)
     const html = Mustache.render(locationMessageTemplate, {
-        username: message.username,
+        username,
         locationURL,
         createdAt: moment(createdAt).format('HH:mm')
     })
