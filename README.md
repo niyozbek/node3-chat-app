@@ -1,2 +1,2 @@
 # node3-chat-app
-Available at: https://niyozbek-chat-application.herokuapp.com/
+<!-- Available at: https://niyozbek-chat-application.herokuapp.com/ -->
